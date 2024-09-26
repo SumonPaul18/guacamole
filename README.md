@@ -2,7 +2,7 @@
 
 ~~~
 git clone https://github.com/SumonPaul18/guacamole.git
-kubeclt apply -f guacamole/ .
+kubectl apply -f guacamole/ .
 kubectl get ns
 
 ~~~
