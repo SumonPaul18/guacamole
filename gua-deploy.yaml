@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guacamole
+  namespace: gua
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guacamole
+  template:
+    metadata:
+      labels:
+        app: guacamole
+    spec:
+      serviceAccountName: guacamole-sa
+      containers:
+      - name: guacamole
+        image: guacamole/guacamole
+        volumeMounts:
+        - name: guacamole-data
+          mountPath: /var/lib/guacamole
+        env:
+        - name: GUACAMOLE_PROPERTIES
+          valueFrom:
+            secretKeyRef:
+              name: guacamole-secret
+              key: guacamole.properties
+      volumes:
+      - name: guacamole-data
+        persistentVolumeClaim:
+          claimName: guacamole-pvc
