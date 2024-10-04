@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guacamole-initdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guacamole-initdb
+  template:
+    metadata:
+      labels:
+        app: guacamole-initdb
+    spec:
+      containers:
+      - name: guacamole-initdb
+        image: guacamole/guacamole
+        command: ["/opt/guacamole/bin/initdb.sh", "--mysql"]
+        volumeMounts:
+        - name: guacamole-db-config
+          mountPath: /opt/guacamole/db.sql
+      volumes:
+      - name: guacamole-db-config
+        secret:
+          secretName: guacamole-db-config-secret
