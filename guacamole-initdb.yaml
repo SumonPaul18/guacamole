@@ -22,4 +22,4 @@ spec:
       volumes:
       - name: guacamole-db-config
         secret:
-          secretName: guacamole-db-config-secret
+          secretName: guacamole-secret
