@@ -30,3 +30,4 @@ spec:
       - name: guacamole-data
         persistentVolumeClaim:
           claimName: guacamole-pvc
+
